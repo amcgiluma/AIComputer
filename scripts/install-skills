@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+npx skills add https://github.com/github/awesome-copilot --skill create-readme -g -y
+npx skills add https://github.com/github/awesome-copilot --skill arch-linux-triage -g -y
+npx skills add https://github.com/purplem0n/linux-assistants --skill cachyos-linux-assistant -g -y
+npx skills add https://github.com/chaterm/terminal-skills --skill system-admin -g -y
+npx skills add https://github.com/mohitmishra786/low-level-dev-skills --skill linux-perf -g -y

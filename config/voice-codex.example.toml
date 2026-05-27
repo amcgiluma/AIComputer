@@ -1,0 +1,78 @@
+[codex]
+model_label = "gpt 5.4 Medium"
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+workdir = "/home/juanma"
+sandbox = "danger-full-access"
+approval_policy = "never"
+bypass_approvals_and_sandbox = true
+resume_strategy = "new-with-history"
+
+[handy]
+model = "canary-180m-flash"
+language = "es"
+toggle_command = "handy --toggle-transcription"
+start_hidden_command = "handy --start-hidden"
+post_process = false
+translate_to_english = false
+ensure_settings = true
+transcription_settle_ms = 1800
+
+[stt]
+engine = "whisper_cpp"
+fallback_engine = "handy"
+record_command = "pw-record"
+source = "@DEFAULT_AUDIO_SOURCE@"
+whisper_executable = "/home/juanma/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
+whisper_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
+language = "es"
+
+[tts]
+engine = "piper"
+fallback_engine = "espeak-ng"
+voice = "es"
+rate = 165
+read_codex_response = true
+read_action_summary = true
+piper_executable = "/home/juanma/.local/share/voice-codex/piper-tts/bin/piper/piper"
+piper_model = "/home/juanma/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
+piper_length_scale = 1.0
+
+[screen]
+mode = "ai_decides"
+allow_fullscreen_capture = true
+allow_region_capture = true
+attach_images_to_codex = true
+ocr_enabled = true
+
+[behavior]
+language = "es"
+tone = "directo"
+autonomy = "high"
+ask_before_destructive_actions = true
+prefer_doing_over_explaining = true
+explain_actions_after_execution = true
+max_spoken_response_seconds = 90
+use_omarchy_skill_by_default = true
+use_arch_skill_by_default = true
+use_cachyos_skill_if_installed = true
+
+[permissions]
+default = "full"
+allow_shell = true
+allow_gui = true
+allow_file_edits = true
+allow_system_config = true
+allow_package_install = true
+allow_browser_control = true
+allow_screen_capture = "ai_decides"
+
+[audit]
+enabled = true
+log_prompts = true
+log_codex_output = true
+log_commands = true
+
+[ui]
+window_title = "Voice Codex"
+auto_focus_on_record = true

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BINDINGS="$HOME/.config/hypr/bindings.conf"
+LINE="bindd = ALT, Z, Voice Codex, exec, $ROOT/scripts/voice-codex-toggle"
+
+mkdir -p "$(dirname "$BINDINGS")"
+touch "$BINDINGS"
+
+if grep -Fqx "$LINE" "$BINDINGS"; then
+  echo "Binding already installed"
+else
+  cp "$BINDINGS" "$BINDINGS.bak.$(date +%s)"
+  printf '\n# Voice Codex\n%s\n' "$LINE" >> "$BINDINGS"
+  echo "Binding installed"
+fi
+
+hyprctl reload
+hyprctl configerrors

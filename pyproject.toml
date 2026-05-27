@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-codex"
+version = "0.1.0"
+description = "Voice-driven local Codex assistant for CachyOS + Omarchy."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+voice-codex = "voice_codex.app:main"
+voice-codex-toggle = "voice_codex.toggle:main"
+voice-codex-doctor = "voice_codex.doctor:main"
+voice-codex-ask = "voice_codex.ask:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
