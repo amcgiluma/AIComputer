@@ -20,9 +20,9 @@ class ConfigTests(unittest.TestCase):
             self.assertFalse(config["ui"]["show_window_on_start"])
 
     def test_default_codex_model_label_is_preserved(self):
-        self.assertEqual(DEFAULT_CONFIG["codex"]["model_label"], "gpt 5.4 Medium")
-        self.assertEqual(DEFAULT_CONFIG["codex"]["model"], "gpt-5.4")
-        self.assertEqual(DEFAULT_CONFIG["codex"]["model_reasoning_effort"], "medium")
+        self.assertEqual(DEFAULT_CONFIG["codex"]["model_label"], "gpt 5.4 Mini Low")
+        self.assertEqual(DEFAULT_CONFIG["codex"]["model"], "gpt-5.4-mini")
+        self.assertEqual(DEFAULT_CONFIG["codex"]["model_reasoning_effort"], "low")
 
 
 if __name__ == "__main__":

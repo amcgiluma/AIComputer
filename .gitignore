@@ -22,6 +22,9 @@ env/
 .env
 .env.*
 
+# Personal publishing drafts
+LINKEDIN_VOICE_CODEX.md
+
 # Editor and OS noise
 .idea/
 .vscode/

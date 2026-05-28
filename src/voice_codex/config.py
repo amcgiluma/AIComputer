@@ -13,9 +13,9 @@ DEFAULT_PIPER_MODEL = PIPER_BASE / "voices" / "es_ES-davefx-medium.onnx"
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "codex": {
-        "model_label": "gpt 5.4 Medium",
-        "model": "gpt-5.4",
-        "model_reasoning_effort": "medium",
+        "model_label": "gpt 5.4 Mini Low",
+        "model": "gpt-5.4-mini",
+        "model_reasoning_effort": "low",
         "workdir": str(Path.home()),
         "sandbox": "danger-full-access",
         "approval_policy": "never",
@@ -45,6 +45,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "audio_filter": "highpass=f=90,lowpass=f=7600,afftdn=nf=-25,dynaudnorm=f=150:g=15:p=0.95",
         "suppress_non_speech_tokens": True,
         "initial_prompt": "Transcribe solamente voz hablada en espanol.",
+        "transcription_settle_ms": 250,
         "vad_enabled": True,
         "vad_model": str(Path.home() / ".local" / "share" / "voice-codex" / "whisper.cpp" / "models" / "ggml-silero-v6.2.0.bin"),
         "vad_threshold": 0.35,

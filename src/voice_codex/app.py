@@ -113,7 +113,10 @@ class VoiceCodexApp(Gtk.Application):
             return False
         if action == "stop":
             self.set_status("Transcribiendo...")
-            settle = int(self.config["handy"].get("transcription_settle_ms", 1800))
+            if self.config.get("stt", {}).get("engine") == "whisper_cpp":
+                settle = int(self.config["stt"].get("transcription_settle_ms", 250))
+            else:
+                settle = int(self.config["handy"].get("transcription_settle_ms", 1800))
             GLib.timeout_add(settle, self.process_after_handy)
             return False
         return False

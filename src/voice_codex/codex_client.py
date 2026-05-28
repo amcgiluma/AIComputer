@@ -54,7 +54,7 @@ class CodexClient:
             "exec",
             "--json",
             "-m",
-            str(codex.get("model", "gpt-5.4")),
+            str(codex.get("model", "gpt-5.4-mini")),
             "-C",
             str(Path(str(codex.get("workdir", str(Path.home())))).expanduser()),
             "-s",
