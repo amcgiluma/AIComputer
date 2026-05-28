@@ -15,11 +15,11 @@ La aplicacion graba el microfono con PipeWire, transcribe localmente con `whispe
 
 ## Demo
 
-<video src="https://github.com/amcgiluma/AIComputer/raw/master/docs/demo/voice-codex-demo.mp4" controls width="100%" title="Voice Codex demo"></video>
+[![Voice Codex demo preview](docs/demo/voice-codex-demo-preview.gif)](docs/demo/voice-codex-demo.mp4)
 
-[Abrir demo en GitHub](docs/demo/voice-codex-demo.mp4)
+[Ver demo completa en video](docs/demo/voice-codex-demo.mp4)
 
-La demo muestra el flujo principal: `Alt+Z`, escucha en segundo plano, transcripcion local con `whisper.cpp`, ejecucion mediante Codex CLI, memoria persistente y respuesta hablada con Piper TTS.
+La demo completa esta subida como MP4 al repositorio. GitHub no renderiza de forma fiable etiquetas HTML `<video>` en el README, asi que el README muestra un preview animado y enlaza el video completo reproducible desde GitHub.
 
 ## Caracteristicas
 
