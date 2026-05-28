@@ -15,7 +15,9 @@ La aplicacion graba el microfono con PipeWire, transcribe localmente con `whispe
 
 ## Demo
 
-[Ver demo en video](docs/demo/voice-codex-demo.mp4)
+<video src="https://raw.githubusercontent.com/amcgiluma/AIComputer/master/docs/demo/voice-codex-demo.mp4" controls width="100%" title="Voice Codex demo"></video>
+
+[Abrir demo en GitHub](docs/demo/voice-codex-demo.mp4)
 
 La demo muestra el flujo principal: `Alt+Z`, escucha en segundo plano, transcripcion local con `whisper.cpp`, ejecucion mediante Codex CLI, memoria persistente y respuesta hablada con Piper TTS.
 
