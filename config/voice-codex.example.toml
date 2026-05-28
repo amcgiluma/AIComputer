@@ -26,6 +26,14 @@ source = "@DEFAULT_AUDIO_SOURCE@"
 whisper_executable = "/home/juanma/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
 whisper_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
 language = "es"
+normalize_audio = true
+ffmpeg_executable = "ffmpeg"
+audio_filter = "highpass=f=90,lowpass=f=7600,afftdn=nf=-25,dynaudnorm=f=150:g=15:p=0.95"
+suppress_non_speech_tokens = true
+initial_prompt = "Transcribe solamente voz hablada en espanol."
+vad_enabled = true
+vad_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-silero-v6.2.0.bin"
+vad_threshold = 0.35
 
 [tts]
 engine = "piper"
@@ -73,6 +81,15 @@ log_prompts = true
 log_codex_output = true
 log_commands = true
 
+[memory]
+enabled = true
+dir = "/home/juanma/.codex/memories/voice-codex"
+max_bytes = 20000
+
 [ui]
 window_title = "Voice Codex"
-auto_focus_on_record = true
+auto_focus_on_record = false
+show_window_on_start = false
+indicator = "notification"
+notification_icon = "assistant"
+notification_timeout_ms = 1800

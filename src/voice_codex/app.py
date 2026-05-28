@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import atexit
+import os
 import threading
 
 import gi
@@ -30,6 +31,8 @@ class VoiceCodexApp(Gtk.Application):
         self.input_view: Gtk.TextView | None = None
         self.output_view: Gtk.TextView | None = None
         self.status_label: Gtk.Label | None = None
+        self.pending_input = ""
+        self.output_history: list[str] = []
         self.handy_start_history_id = 0
         self.handy_poll_attempts = 0
 
@@ -39,8 +42,10 @@ class VoiceCodexApp(Gtk.Application):
         handy_msg = ensure_handy_settings(self.config["handy"])
         if handy_msg:
             self.audit.write("handy", handy_msg)
-        self.build_window()
-        self.window.present()
+        if self.should_show_window_on_start():
+            if not self.window:
+                self.build_window()
+            self.window.present()
 
     def build_window(self) -> None:
         self.window = Gtk.ApplicationWindow(application=self)
@@ -103,7 +108,8 @@ class VoiceCodexApp(Gtk.Application):
             self.handy_poll_attempts = 0
             self.clear_input()
             self.set_status("Escuchando...")
-            self.present_and_focus()
+            if self.config["ui"].get("auto_focus_on_record", False):
+                self.present_and_focus()
             return False
         if action == "stop":
             self.set_status("Transcribiendo...")
@@ -118,11 +124,18 @@ class VoiceCodexApp(Gtk.Application):
         if self.input_view:
             self.input_view.grab_focus()
 
+    def should_show_window_on_start(self) -> bool:
+        if os.environ.get("VOICE_CODEX_START_HIDDEN") == "1":
+            return False
+        return bool(self.config["ui"].get("show_window_on_start", True))
+
     def clear_input(self) -> None:
+        self.pending_input = ""
         if self.input_view:
             self.input_view.get_buffer().set_text("")
 
     def set_input_text(self, text: str) -> None:
+        self.pending_input = text
         if self.input_view:
             self.input_view.get_buffer().set_text(text)
 
@@ -180,13 +193,15 @@ class VoiceCodexApp(Gtk.Application):
 
     def get_input_text(self) -> str:
         if not self.input_view:
-            return ""
+            return self.pending_input
         buffer = self.input_view.get_buffer()
         start = buffer.get_start_iter()
         end = buffer.get_end_iter()
         return buffer.get_text(start, end, True)
 
     def append_output(self, text: str) -> None:
+        self.output_history.append(text)
+        self.output_history = self.output_history[-80:]
         if not self.output_view:
             return
         buffer = self.output_view.get_buffer()

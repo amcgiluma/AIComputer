@@ -13,7 +13,7 @@ def main() -> int:
     config = load_config()
     checks: list[tuple[str, bool, str]] = []
 
-    for command in ("codex", "handy", "hyprctl", "grim", "slurp", "tesseract", "espeak-ng", "pw-record"):
+    for command in ("codex", "handy", "hyprctl", "grim", "slurp", "tesseract", "espeak-ng", "pw-record", "ffmpeg"):
         found = shutil.which(command)
         checks.append((command, bool(found), found or "no encontrado"))
 
@@ -23,6 +23,8 @@ def main() -> int:
     whisper_ok = whisper_bin.exists() and whisper_model.exists()
     whisper_note = f"{whisper_bin} / {whisper_model}" if whisper_ok else "binario o modelo no encontrado"
     checks.append(("whisper.cpp", whisper_ok, whisper_note))
+    vad_model = Path(str(stt.get("vad_model") or "")).expanduser()
+    checks.append(("whisper-vad", vad_model.exists(), str(vad_model)))
 
     configured_piper = str(config.get("tts", {}).get("piper_executable") or "")
     piper_bin = configured_piper if configured_piper and Path(configured_piper).exists() else None

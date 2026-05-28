@@ -15,6 +15,9 @@ class ConfigTests(unittest.TestCase):
             self.assertEqual(config["tts"]["engine"], "piper")
             self.assertIn("piper_model", config["tts"])
             self.assertEqual(config["codex"]["sandbox"], "danger-full-access")
+            self.assertTrue(config["memory"]["enabled"])
+            self.assertEqual(config["ui"]["indicator"], "notification")
+            self.assertFalse(config["ui"]["show_window_on_start"])
 
     def test_default_codex_model_label_is_preserved(self):
         self.assertEqual(DEFAULT_CONFIG["codex"]["model_label"], "gpt 5.4 Medium")

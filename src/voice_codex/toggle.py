@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import shutil
 import subprocess
 import sys
 import time
@@ -13,7 +15,8 @@ def main() -> int:
     paths.runtime_dir().mkdir(parents=True, exist_ok=True)
     config = load_config()
     ensure_app()
-    focus_app()
+    if config["ui"].get("auto_focus_on_record", False):
+        focus_app()
 
     if paths.listening_file().exists():
         if config.get("stt", {}).get("engine") == "whisper_cpp":
@@ -23,10 +26,12 @@ def main() -> int:
             run_handy_toggle()
         paths.listening_file().unlink(missing_ok=True)
         ipc.send("stop")
+        notify_indicator(config, "Voice Codex", "Procesando voz...")
         return 0
 
     paths.listening_file().write_text(str(time.time()), encoding="utf-8")
     ipc.send("start")
+    notify_indicator(config, "Voice Codex", "Escuchando...")
     if config.get("stt", {}).get("engine") == "whisper_cpp":
         start_pipewire_recording(config)
     else:
@@ -40,11 +45,14 @@ def ensure_app() -> None:
         return
     paths.socket_file().unlink(missing_ok=True)
     script = project_root() / "scripts" / "voice-codex"
+    env = os.environ.copy()
+    env["VOICE_CODEX_START_HIDDEN"] = "1"
     subprocess.Popen(
         [str(script)],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
         stdin=subprocess.DEVNULL,
+        env=env,
         start_new_session=True,
     )
     deadline = time.time() + 4
@@ -57,6 +65,34 @@ def ensure_app() -> None:
 def focus_app() -> None:
     subprocess.run(
         ["hyprctl", "dispatch", "focuswindow", "title:^(Voice Codex)$"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
+def notify_indicator(config: dict, title: str, body: str) -> None:
+    ui = config.get("ui", {})
+    if ui.get("indicator", "notification") != "notification":
+        return
+    exe = shutil.which("notify-send")
+    if not exe:
+        return
+    timeout = str(int(ui.get("notification_timeout_ms", 1800) or 1800))
+    icon = str(ui.get("notification_icon", "assistant"))
+    subprocess.run(
+        [
+            exe,
+            "-a",
+            "Voice Codex",
+            "-i",
+            icon,
+            "-t",
+            timeout,
+            "-h",
+            "string:x-canonical-private-synchronous:voice-codex",
+            title,
+            body,
+        ],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )

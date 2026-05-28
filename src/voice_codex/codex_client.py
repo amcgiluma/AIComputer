@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from .memory import load_memory_context
 from . import screen_context
 from .skills import system_prompt
 
@@ -87,6 +88,7 @@ class CodexClient:
         previous = "\n".join(
             f"Usuario: {user}\nVoice Codex: {assistant}" for user, assistant in self.history[-3:]
         )
+        memory = load_memory_context(self.config.get("memory", {}))
         visual = ""
         if images:
             visual = "\nSe adjunta captura de pantalla. Usala si ayuda a resolver la tarea."
@@ -100,6 +102,9 @@ class CodexClient:
 
 Historial reciente:
 {previous or "Sin historial previo."}
+
+Memoria persistente:
+{memory or "Sin memoria persistente guardada todavia."}
 
 Peticion actual del usuario:
 {user_text}

@@ -4,6 +4,7 @@ After=graphical-session.target
 
 [Service]
 Type=simple
+Environment=VOICE_CODEX_START_HIDDEN=1
 ExecStart=/home/juanma/AIComputerbyAmccgil/scripts/voice-codex
 Restart=on-failure
 RestartSec=2

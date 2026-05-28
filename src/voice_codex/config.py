@@ -40,6 +40,14 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "whisper_executable": str(Path.home() / ".local" / "share" / "voice-codex" / "whisper.cpp" / "build" / "bin" / "whisper-cli"),
         "whisper_model": str(Path.home() / ".local" / "share" / "voice-codex" / "whisper.cpp" / "models" / "ggml-base.bin"),
         "language": "es",
+        "normalize_audio": True,
+        "ffmpeg_executable": "ffmpeg",
+        "audio_filter": "highpass=f=90,lowpass=f=7600,afftdn=nf=-25,dynaudnorm=f=150:g=15:p=0.95",
+        "suppress_non_speech_tokens": True,
+        "initial_prompt": "Transcribe solamente voz hablada en espanol.",
+        "vad_enabled": True,
+        "vad_model": str(Path.home() / ".local" / "share" / "voice-codex" / "whisper.cpp" / "models" / "ggml-silero-v6.2.0.bin"),
+        "vad_threshold": 0.35,
     },
     "tts": {
         "engine": "piper",
@@ -87,9 +95,18 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "log_codex_output": True,
         "log_commands": True,
     },
+    "memory": {
+        "enabled": True,
+        "dir": str(Path.home() / ".codex" / "memories" / "voice-codex"),
+        "max_bytes": 20000,
+    },
     "ui": {
         "window_title": "Voice Codex",
-        "auto_focus_on_record": True,
+        "auto_focus_on_record": False,
+        "show_window_on_start": False,
+        "indicator": "notification",
+        "notification_icon": "assistant",
+        "notification_timeout_ms": 1800,
     },
 }
 
