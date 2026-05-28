@@ -1,6 +1,6 @@
 # Voice Codex
 
-Voice Codex convierte un escritorio CachyOS + Omarchy en un asistente local de voz para Codex.
+Voice Codex convierte un escritorio CachyOS + Omarchy en un asistente local de voz para Codex, controlado por atajo global, transcripcion local y respuesta hablada.
 
 El flujo principal es:
 
@@ -74,7 +74,8 @@ Whisper local se instala en espacio de usuario:
 Desde el repo:
 
 ```bash
-cd /home/juanma/AIComputerbyAmccgil
+git clone https://github.com/amcgiluma/AIComputer.git
+cd AIComputer
 chmod +x scripts/voice-codex scripts/voice-codex-toggle scripts/voice-codex-doctor scripts/voice-codex-ask scripts/install-hypr-binding scripts/install-skills
 ```
 
@@ -93,7 +94,7 @@ Configura el atajo de Hyprland:
 Ese script agrega esta linea a `~/.config/hypr/bindings.conf` si no existe:
 
 ```text
-bindd = ALT, Z, Voice Codex, exec, /home/juanma/AIComputerbyAmccgil/scripts/voice-codex-toggle
+bindd = ALT, Z, Voice Codex, exec, <repo>/scripts/voice-codex-toggle
 ```
 
 Tambien ejecuta:
@@ -134,13 +135,9 @@ Uso normal:
 5. Codex recibe la peticion, actua y responde.
 6. La app lee la respuesta con Piper TTS en espanol.
 
-Tambien puedes escribir directamente en la ventana y pulsar `Enviar a Codex`.
+Si activas la ventana GTK de depuracion, tambien puedes escribir directamente y pulsar `Enviar a Codex`.
 
 `Alt+Z` no abre la ventana grande. Si la app no estaba viva, el atajo la arranca oculta y muestra una notificacion breve.
-
-```bash
-./scripts/voice-codex
-```
 
 ## Configuracion
 
@@ -157,7 +154,7 @@ Ejemplo base:
 model_label = "gpt 5.4 Medium"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
-workdir = "/home/juanma"
+workdir = "~"
 sandbox = "danger-full-access"
 approval_policy = "never"
 bypass_approvals_and_sandbox = true
@@ -173,8 +170,8 @@ engine = "whisper_cpp"
 fallback_engine = "handy"
 record_command = "pw-record"
 source = "@DEFAULT_AUDIO_SOURCE@"
-whisper_executable = "/home/juanma/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
-whisper_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
+whisper_executable = "~/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
+whisper_model = "~/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
 language = "es"
 normalize_audio = true
 ffmpeg_executable = "ffmpeg"
@@ -182,7 +179,7 @@ audio_filter = "highpass=f=90,lowpass=f=7600,afftdn=nf=-25,dynaudnorm=f=150:g=15
 suppress_non_speech_tokens = true
 initial_prompt = "Transcribe solamente voz hablada en espanol."
 vad_enabled = true
-vad_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-silero-v6.2.0.bin"
+vad_model = "~/.local/share/voice-codex/whisper.cpp/models/ggml-silero-v6.2.0.bin"
 vad_threshold = 0.35
 
 [tts]
@@ -190,8 +187,8 @@ engine = "piper"
 fallback_engine = "espeak-ng"
 voice = "es"
 rate = 165
-piper_executable = "/home/juanma/.local/share/voice-codex/piper-tts/bin/piper/piper"
-piper_model = "/home/juanma/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
+piper_executable = "~/.local/share/voice-codex/piper-tts/bin/piper/piper"
+piper_model = "~/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
 piper_length_scale = 1.0
 
 [screen]
@@ -200,7 +197,7 @@ ocr_enabled = true
 
 [memory]
 enabled = true
-dir = "/home/juanma/.codex/memories/voice-codex"
+dir = "~/.codex/memories/voice-codex"
 max_bytes = 20000
 
 [ui]
@@ -320,8 +317,8 @@ Voice Codex usa por defecto el binario oficial de Rhasspy/Piper y la voz espanol
 ```toml
 [tts]
 engine = "piper"
-piper_executable = "/home/juanma/.local/share/voice-codex/piper-tts/bin/piper/piper"
-piper_model = "/home/juanma/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
+piper_executable = "~/.local/share/voice-codex/piper-tts/bin/piper/piper"
+piper_model = "~/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
 ```
 
 > [!NOTE]
@@ -394,7 +391,7 @@ Tambien puedes borrar la linea `model` para dejar que Codex use su modelo por de
 Quita el binding de `~/.config/hypr/bindings.conf`:
 
 ```text
-bindd = ALT, Z, Voice Codex, exec, /home/juanma/AIComputerbyAmccgil/scripts/voice-codex-toggle
+bindd = ALT, Z, Voice Codex, exec, <repo>/scripts/voice-codex-toggle
 ```
 
 Recarga Hyprland:

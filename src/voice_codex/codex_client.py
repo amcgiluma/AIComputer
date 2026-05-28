@@ -56,7 +56,7 @@ class CodexClient:
             "-m",
             str(codex.get("model", "gpt-5.4")),
             "-C",
-            str(codex.get("workdir", str(Path.home()))),
+            str(Path(str(codex.get("workdir", str(Path.home())))).expanduser()),
             "-s",
             str(codex.get("sandbox", "danger-full-access")),
             "-o",

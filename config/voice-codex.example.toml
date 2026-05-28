@@ -2,7 +2,7 @@
 model_label = "gpt 5.4 Medium"
 model = "gpt-5.4"
 model_reasoning_effort = "medium"
-workdir = "/home/juanma"
+workdir = "~"
 sandbox = "danger-full-access"
 approval_policy = "never"
 bypass_approvals_and_sandbox = true
@@ -23,8 +23,8 @@ engine = "whisper_cpp"
 fallback_engine = "handy"
 record_command = "pw-record"
 source = "@DEFAULT_AUDIO_SOURCE@"
-whisper_executable = "/home/juanma/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
-whisper_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
+whisper_executable = "~/.local/share/voice-codex/whisper.cpp/build/bin/whisper-cli"
+whisper_model = "~/.local/share/voice-codex/whisper.cpp/models/ggml-base.bin"
 language = "es"
 normalize_audio = true
 ffmpeg_executable = "ffmpeg"
@@ -32,7 +32,7 @@ audio_filter = "highpass=f=90,lowpass=f=7600,afftdn=nf=-25,dynaudnorm=f=150:g=15
 suppress_non_speech_tokens = true
 initial_prompt = "Transcribe solamente voz hablada en espanol."
 vad_enabled = true
-vad_model = "/home/juanma/.local/share/voice-codex/whisper.cpp/models/ggml-silero-v6.2.0.bin"
+vad_model = "~/.local/share/voice-codex/whisper.cpp/models/ggml-silero-v6.2.0.bin"
 vad_threshold = 0.35
 
 [tts]
@@ -42,8 +42,8 @@ voice = "es"
 rate = 165
 read_codex_response = true
 read_action_summary = true
-piper_executable = "/home/juanma/.local/share/voice-codex/piper-tts/bin/piper/piper"
-piper_model = "/home/juanma/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
+piper_executable = "~/.local/share/voice-codex/piper-tts/bin/piper/piper"
+piper_model = "~/.local/share/voice-codex/piper-tts/voices/es_ES-davefx-medium.onnx"
 piper_length_scale = 1.0
 
 [screen]
@@ -83,7 +83,7 @@ log_commands = true
 
 [memory]
 enabled = true
-dir = "/home/juanma/.codex/memories/voice-codex"
+dir = "~/.codex/memories/voice-codex"
 max_bytes = 20000
 
 [ui]

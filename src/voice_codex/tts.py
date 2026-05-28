@@ -47,6 +47,7 @@ class Speaker:
         exe = self.config.get("piper_executable") or shutil.which("piper-tts") or shutil.which("piper")
         if not exe:
             return "Piper TTS no esta instalado. El paquete 'piper' de Arch es una app de ratones, no TTS."
+        exe_path = Path(str(exe)).expanduser()
 
         model = self.config.get("piper_model")
         if not model:
@@ -60,7 +61,7 @@ class Speaker:
 
         try:
             cmd = [
-                str(exe),
+                str(exe_path),
                 "--model",
                 str(model_path),
                 "--output_file",
