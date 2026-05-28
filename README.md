@@ -13,6 +13,12 @@ La aplicacion graba el microfono con PipeWire, transcribe localmente con `whispe
 > [!WARNING]
 > La configuracion por defecto da a Codex permisos completos sobre el ordenador (`danger-full-access`, aprobaciones desactivadas y bypass de sandbox). Es deliberado para este proyecto, pero debe usarse solo en una maquina personal donde entiendas el riesgo.
 
+## Demo
+
+[Ver demo en video](docs/demo/voice-codex-demo.mp4)
+
+La demo muestra el flujo principal: `Alt+Z`, escucha en segundo plano, transcripcion local con `whisper.cpp`, ejecucion mediante Codex CLI, memoria persistente y respuesta hablada con Piper TTS.
+
 ## Caracteristicas
 
 - Atajo global `Alt+Z` integrado con Hyprland/Omarchy.
@@ -293,6 +299,10 @@ Compilar modulos:
 ```bash
 python -m compileall src
 ```
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia [Apache License 2.0](LICENSE).
 
 ## Solucion de problemas
 
