@@ -15,7 +15,7 @@ La aplicacion graba el microfono con PipeWire, transcribe localmente con `whispe
 
 ## Demo
 
-<video src="https://raw.githubusercontent.com/amcgiluma/AIComputer/master/docs/demo/voice-codex-demo.mp4" controls width="100%" title="Voice Codex demo"></video>
+<video src="https://github.com/amcgiluma/AIComputer/raw/master/docs/demo/voice-codex-demo.mp4" controls width="100%" title="Voice Codex demo"></video>
 
 [Abrir demo en GitHub](docs/demo/voice-codex-demo.mp4)
 
